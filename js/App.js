@@ -146,7 +146,7 @@ export class App {
         const heure = form['heure-debut'].value;
         const duree = parseInt(form['duree'].value, 10);
 
-        const erreurs = Reservation.validerReservation(date, heure, duree);
+        const erreurs = Reservation.validerReservation(date, heure);
         if (erreurs.length > 0) {
             alert(erreurs.join('\n'));
             return;

@@ -7,23 +7,18 @@ export class Reservation {
         this.duree = duree;
         this.id = `${idBorne}-${date}-${heureDebut}`;
     }
-    static validerReservation(date, heureDebut, duree) {
+    static validerReservation(date, heureDebut) {
         const errors = [];
-        const dateReservation = new Date(date);
-        const aujourdhui = new Date();
-        aujourdhui.setHours(0, 0, 0, 0);
-        if (dateReservation < aujourdhui) {
-            errors.push("La date doit être future");
+        const maintenant = new Date();
+        const dateHeureReservation = new Date(`${date}T${heureDebut}`);
+
+        if (dateHeureReservation <= maintenant) {
+            errors.push("La date et l'heure doivent être dans le futur");
         }
-        const [heures, minutes] = heureDebut.split(':').map(Number);
-        if (heures < 6 || heures > 22) {
-            errors.push("L'heure doit être entre 6h et 22h");
-        }
-        if (duree < 1 || duree > 6) {
-            errors.push("La durée doit être entre 1 et 6 heures");
-        }
+
         return errors;
     }
+
     static sauvegarder(reservation) {
         const reservations = this.lireReservations();
         reservations.push(reservation);
