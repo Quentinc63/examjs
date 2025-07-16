@@ -1,14 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Electricity Business - Bornes de recharge</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="./style.css">
+
 </head>
 
 <body>
-    <script src="./main.js"></script>"
+    <div class="container">
+        <h1>Electricity Business</h1>
+
+        <div class="compte-rebours">
+            Prochaine réservation : <span id="compte-rebours">Aucune réservation prévue</span>
+        </div>
+
+        <div class="section">
+            <h2>Rechercher des bornes</h2>
+            <form id="form-recherche">
+                <div class="form-group">
+                    <label for="input-adresse">Adresse :</label>
+                    <input type="text" id="input-adresse" placeholder="222 boulevard Gustave Flaubert, Clermont-Ferrand"
+                        required>
+                </div>
+                <button type="submit">Rechercher</button>
+            </form>
+        </div>
+
+        <div class="controls">
+            <button id="btn-basculer-vue">Afficher la liste</button>
+        </div>
+
+        <div class="section">
+            <h2>Bornes de recharge</h2>
+            <div id="carte"></div>
+            <div id="liste-bornes"></div>
+        </div>
+
+        <div class="section">
+            <h2>Historique des réservations</h2>
+            <div id="historique-reservations"></div>
+        </div>
+    </div>
+
+    <div id="modal-reservation" class="modal">
+        <div class="modal-content">
+            <span class="close" id="btn-fermer-modal">&times;</span>
+            <h2>Réserver une borne</h2>
+            <form id="form-reservation">
+                <input type="hidden" id="borne-id">
+                <input type="hidden" id="borne-type">
+
+                <div class="form-group">
+                    <label for="date-reservation">Date :</label>
+                    <input type="date" id="date-reservation" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="heure-debut">Heure de début :</label>
+                    <input type="time" id="heure-debut" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="duree">Durée (heures) :</label>
+                    <select id="duree" required>
+                        <option value="1">1 heure</option>
+                        <option value="2">2 heures</option>
+                        <option value="3">3 heures</option>
+                        <option value="4">4 heures</option>
+                        <option value="5">5 heures</option>
+                        <option value="6">6 heures</option>
+                    </select>
+                </div>
+
+                <button type="submit">Confirmer la réservation</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 
 </html>
