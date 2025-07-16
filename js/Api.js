@@ -3,7 +3,6 @@ export const API = {
         try {
             const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(adresse)}`);
             const data = await response.json();
-
             if (data.length > 0) {
                 return {
                     lat: parseFloat(data[0].lat),
@@ -26,17 +25,16 @@ export const API = {
             };
         }
     },
-
     async getBornes(lat, lon, rayon = 5000) {
         const query = `
-    [out:json][timeout:25];
-    (
-        node["amenity"="charging_station"](around:${rayon},${lat},${lon});
-        way["amenity"="charging_station"](around:${rayon},${lat},${lon});
-        relation["amenity"="charging_station"](around:${rayon},${lat},${lon});
-    );
-    out center meta;
-    `;
+            [out:json][timeout:25];
+            (
+                node["amenity"="charging_station"](around:${rayon},${lat},${lon});
+                way["amenity"="charging_station"](around:${rayon},${lat},${lon});
+                relation["amenity"="charging_station"](around:${rayon},${lat},${lon});
+            );
+            out center meta;
+            `;
 
         const url = 'https://overpass.kumi.systems/api/interpreter';
 
@@ -63,7 +61,6 @@ export const API = {
                 success: true,
                 bornes: data.elements || []
             };
-
         } catch (error) {
             console.error('Erreur Overpass:', error.message);
             return {
