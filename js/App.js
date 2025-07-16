@@ -109,14 +109,16 @@ export class App {
         const liste = document.getElementById('liste-bornes');
         liste.innerHTML = this.bornes.map(borne => borne.toHTML()).join('');
 
-        liste.querySelectorAll('.btn-reserver').forEach(btn => {
+        const boutons = liste.querySelectorAll('.btn-reserver');
+        for (const btn of boutons) {
             btn.addEventListener('click', () => {
                 const id = btn.dataset.id;
                 const borne = this.bornes.find(b => b.id == id);
                 if (borne) this.ouvrirModalReservation(borne);
             });
-        });
+        }
     }
+
 
     ouvrirModalReservation(borne) {
         const modal = document.getElementById('modal-reservation');
