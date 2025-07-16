@@ -13,10 +13,8 @@ export class App {
 
     async init() {
         await this.mapManager.initCarte();
-
         const center = this.mapManager.carte.getCenter();
         await this.chargerBornes(center.lat, center.lng);
-
         this.mapManager.carte.on('moveend', () => {
             if (this.debounceTimeout) {
                 clearTimeout(this.debounceTimeout);

@@ -53,8 +53,8 @@ export const API = {
 
             if (!contentType.includes('application/json')) {
                 const text = await response.text();
-                console.error('Réponse non-JSON de Overpass (probablement une erreur HTML) :', text);
-                throw new Error('Réponse invalide de Overpass API. Probablement rate-limited ou en erreur.');
+                console.error('ERREUR HTML', text);
+                throw new Error('TROP D APPEL');
             }
 
             const data = await response.json();
