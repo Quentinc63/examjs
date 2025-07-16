@@ -14,17 +14,17 @@ export class MapManager {
     }
 
     ajouterMarqueurs(bornes, onClickBorne) {
-        this.marqueurs.forEach(m => this.carte.removeLayer(m));
+        for (const marqueur of this.marqueurs) {
+            this.carte.removeLayer(marqueur);
+        }
         this.marqueurs = [];
 
-        bornes.forEach(borne => {
+        for (const borne of bornes) {
             const marker = L.marker([borne.lat, borne.lon]).addTo(this.carte);
             marker.bindPopup(`
                 <b>${borne.getLabel()}</b><br>ID: ${borne.id}
                 <br><button class="btn-reserver-popup" data-id="${borne.id}" data-type="${borne instanceof BornePrivee ? 'privee' : 'publique'}">Réserver</button>
             `);
-
-
             marker.on('popupopen', () => {
                 const btn = document.querySelector('.btn-reserver-popup');
                 if (btn) {
@@ -32,7 +32,7 @@ export class MapManager {
                 }
             });
             this.marqueurs.push(marker);
-        });
+        }
     }
 
     setView(lat, lon, zoom = 13) {

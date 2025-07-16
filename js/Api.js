@@ -1,7 +1,8 @@
 export const API = {
     async geocoder(adresse) {
         try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(adresse)}`);
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(adresse)}`);
             const data = await response.json();
             if (data.length > 0) {
                 return {
@@ -17,6 +18,7 @@ export const API = {
             }
         } catch (error) {
             console.error('Erreur géocodage:', error);
+            //clermont ferrand
             return {
                 lat: 45.75806298279684,
                 lon: 3.1270760116784317,
@@ -57,10 +59,7 @@ export const API = {
 
             const data = await response.json();
 
-            return {
-                success: true,
-                bornes: data.elements || []
-            };
+            return { success: true, bornes: data.elements || [] };
         } catch (error) {
             console.error('Erreur Overpass:', error.message);
             return {
